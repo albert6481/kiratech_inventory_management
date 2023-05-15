@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <title>Inventory Detail</title>
+    <style>
+        /* Style for item image */
+        .item-img {
+            max-width: 50%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        /* Style for item details table */
+        .item-table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .item-table td,
+        .item-table th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .item-table th {
+            background-color: #f2f2f2;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>Inventory Detail</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <img class="item-img" src="{% static 'inventory/item_image.png' %}" alt="Item Image">
+                <!-- <img class="item-img" src="https://via.placeholder.com/400x300.png?text=Item+Image" alt="Item Image"> -->
+                <table class="item-table">
+                    <tr>
+                        <th>Name:</th>
+                        <td>{{ object.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description:</th>
+                        <td>{{ object.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Notes:</th>
+                        <td>{{ object.notes }}</td>
+                    </tr>
+                    <tr>
+                        <th>Stock:</th>
+                        <td>{{ object.stock }}</td>
+                    </tr>
+                    <tr>
+                        <th>Availability:</th>
+                        <td>{{ object.availability }}</td>
+                    </tr>
+                    <tr>
+                        <th>Supplier:</th>
+                        <td>{{ object.supplier.name }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

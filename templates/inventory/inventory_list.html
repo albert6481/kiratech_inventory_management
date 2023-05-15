@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inventory List</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        input[type="text"] {
+            width: 200px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Inventory List</h1>
+    <input type="text" id="search-input" placeholder="Search by name">
+    <button id="search-button">Search</button>
+    <table id="data-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Supplier Name</th>
+                <th>Availability</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+        const tableBody = document.querySelector('#data-table tbody');
+        const searchInput = document.querySelector('#search-input');
+        const searchButton = document.querySelector('#search-button');
+
+        function displayData (data) {
+            tableBody.innerHTML = '';
+
+            data.forEach(inventory => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+            <td>${inventory.name}</td>
+            <td>${inventory.supplier.name}</td>
+            <td>${inventory.availability}</td>
+          `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function fetchData () {
+            fetch('http://127.0.0.1:8000/api/inventory')
+                .then(response => response.json())
+                .then(data => displayData(data))
+                .catch(error => console.error(error));
+        }
+
+        fetchData();
+        searchButton.addEventListener('click', () => {
+            const searchQuery = searchInput.value;
+
+            if (searchQuery.length === 0) {
+                fetchData();
+            } else {
+                fetch(`http://127.0.0.1:8000/api/inventory?name=${searchQuery}`)
+                    .then(response => response.json())
+                    .then(data => displayData(data))
+                    .catch(error => console.error(error));
+            }
+        });
+    </script>
+</body>
+
+</html>
