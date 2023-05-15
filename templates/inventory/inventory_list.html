@@ -68,7 +68,7 @@
                 row.innerHTML = `
             <td>${inventory.name}</td>
             <td>${inventory.supplier.name}</td>
-            <td>${inventory.availability}</td>
+            <td>${inventory.availability? 'Yes' : 'No'}</td>
           `;
                 tableBody.appendChild(row);
             });

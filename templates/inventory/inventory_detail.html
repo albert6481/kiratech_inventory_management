@@ -47,11 +47,11 @@
                     </tr>
                     <tr>
                         <th>Description:</th>
-                        <td>{{ object.description }}</td>
+                        <td>{{ object.description|default_if_none:"" }}</td>
                     </tr>
                     <tr>
                         <th>Notes:</th>
-                        <td>{{ object.notes }}</td>
+                        <td>{{ object.notes|default_if_none:"" }}</td>
                     </tr>
                     <tr>
                         <th>Stock:</th>
@@ -59,7 +59,7 @@
                     </tr>
                     <tr>
                         <th>Availability:</th>
-                        <td>{{ object.availability }}</td>
+                        <td>{{ object.availability|yesno:"Yes,No" }}</td>
                     </tr>
                     <tr>
                         <th>Supplier:</th>
